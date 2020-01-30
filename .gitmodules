@@ -1,0 +1,3 @@
+[submodule "lifepo-research/packetparse"]
+	path = lifepo-research/packetparse
+	url = https://github.com/BrownSpaceEngineering/packetparse
