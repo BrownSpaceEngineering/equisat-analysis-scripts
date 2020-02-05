@@ -19,22 +19,22 @@ import math
 # will only compute up to the min number of signal readings.
 # To get a list of possible signal names, see this document:
 # https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vSCpr4KPwXkXyEMv6oPps-kVsNsd_Ell5whlvj-0T_5N9dIH5jvBTHCl6eZ_xVBugYEiL5CNR-p45G7/pubhtml?gid=589366724&single=true
-SIGNALS = ["LED1TEMP", "LED2TEMP", "LED3TEMP", "LED4TEMP"]
-# SIGNALS = ["timestamp"] # basically all packets
+# SIGNALS = ["LED1TEMP", "LED2TEMP", "LED3TEMP", "LED4TEMP"]
+SIGNALS = ["timestamp"] # basically all packets
 # SIGNALS = ["time_to_flash"] # all individual transmissions (downlinks)
 
-# EARLIEST_DATE = datetime.datetime(2018, 8, 1)
-# LATEST_DATE = datetime.datetime(2020, 2, 1)
+EARLIEST_DATE = datetime.datetime(2018, 7, 13)
+LATEST_DATE = datetime.datetime(2020, 12, 31)
 
-## date ranges ##
+## date ranges for FLASH periods ##
 # EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1551610000)
 # LATEST_DATE =   datetime.datetime.utcfromtimestamp(1551620000)
 # EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1545496000)
 # LATEST_DATE =   datetime.datetime.utcfromtimestamp(1545510000)
 # EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1535170000)
 # LATEST_DATE =   datetime.datetime.utcfromtimestamp(1535180000)
-EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1532560000)
-LATEST_DATE =   datetime.datetime.utcfromtimestamp(1532570000)
+# EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1532560000)
+# LATEST_DATE =   datetime.datetime.utcfromtimestamp(1532570000)
 # EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1554450000)
 # LATEST_DATE =   datetime.datetime.utcfromtimestamp(1554470000)
 # EARLIEST_DATE = datetime.datetime.utcfromtimestamp(1550810000)
