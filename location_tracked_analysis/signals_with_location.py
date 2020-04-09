@@ -43,7 +43,7 @@ LATEST_DATE = datetime.datetime(2020, 12, 31)
 
 OUTFILE = "data/signal_loc_data.csv"
 # download from https://www.space-track.org/basicspacedata/query/class/tle/NORAD_CAT_ID/43552/orderby/EPOCH%20ASC/format/3le
-TLESFILE = "tles.txt"
+TLESFILE = "../tles.txt"
 
 # constants
 DEG_PER_RAD = 360./(2*math.pi)

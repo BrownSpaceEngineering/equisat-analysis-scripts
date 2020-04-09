@@ -16,7 +16,7 @@ import math
 
 # config
 # download from https://www.space-track.org/basicspacedata/query/class/tle/NORAD_CAT_ID/43552/orderby/EPOCH%20ASC/format/3le
-TLESFILE = "tles.txt"
+TLESFILE = "../tles.txt"
 OUTFILE = "data/rx-az-el-rssi_ladd.csv"
 EARLIEST_DATE = datetime.datetime(2018, 8, 1)
 #ONLY_STATION = "Sapienza University of Rome"

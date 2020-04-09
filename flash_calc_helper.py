@@ -27,7 +27,8 @@ burst_ts = flash_burst["preamble"]["timestamp"]
 cmp_added = parse_dt(flash_cmp["added"])
 burst_added = parse_dt(flash_burst["added"])
 
-earliest_ts = flash_cmp["data"][0]["payload"]["timestamp"]
+cmps = flash_cmp["data"]
+earliest_ts = min([cmps[i]["payload"]["timestamp"] for i in range(len(cmps))])
 latest_ts = flash_burst["data"][0]["payload"]["timestamp"]
 
 earliest = cmp_added - datetime.timedelta(seconds=(cmp_ts - earliest_ts))
