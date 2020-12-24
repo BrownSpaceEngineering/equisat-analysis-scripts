@@ -5,6 +5,7 @@ import datetime
 import pytz
 import ephem
 import math
+import sys
 
 EPOCH = datetime.datetime(1970, 1, 1)
 DEG_PER_RAD = 360./(2*math.pi)
@@ -50,6 +51,12 @@ def read_tles(tlefile):
             l3 = f.readline()
             if l3 == "": break
             tles.append(ephem.readtle(l1, l2, l3))
+
+    # warn if TLEs old
+    latest_tle_age = datetime.datetime.now() - tle_date_to_datetime(tles[-1])
+    if latest_tle_age > datetime.timedelta(days=7):
+        print("equisat_lib: WARNING: last TLE in TLE file '%s' is %s old; you may want to run fetch_historical_tles.sh" % (tlefile, latest_tle_age))
+
     return tles
 
 def tle_date_to_datetime(tle):
@@ -62,22 +69,29 @@ def ephem_deg_to_deg(edeg):
 
 def get_tles(tlefile=TLEFILE):
     """ Fetches and sorts ephem TLE objects from the given file. """
-    def cmp_tles_by_date(t1, t2):
-        return int(t1._epoch - t2._epoch)
     tles = read_tles(tlefile)
-    tles = sorted(tles, cmp=cmp_tles_by_date)
+    if sys.version_info[0] == 2:
+        def cmp_tles_by_date(t1, t2):
+            return int(t1._epoch - t2._epoch)
+        tles = sorted(tles, cmp=cmp_tles_by_date)
+    else:
+        def tles_date_key(t):
+            return int(t._epoch)
+        tles = sorted(tles, key=tles_date_key)
     return tles
 
 def get_tle_for_time(dt, tles):
     """ Returns the ephem TLE object to use to compute positions at the given local time,
     using the given SORTED tles from get_tles. """
     if len(tles) == 0:
+        print("equisat_lib: get_tle_for_time: error: tle list is empty")
         return None
     elif len(tles) == 1:
         # assume it's a recent TLE... (ephem will yell at people who use it anyways)
         if dt > tle_date_to_datetime(tles[0]):
             return tles[0]
         else:
+            print("equisat_lib: get_tle_for_time: error: date is before earliest TLE in tles (maybe before launch?)")
             return None
     else:
         mid = int(len(tles)/2)-1

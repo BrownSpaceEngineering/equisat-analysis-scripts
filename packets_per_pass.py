@@ -7,10 +7,11 @@ import json
 import datetime
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 ## config ##
-ONLY_STATION = "Sapienza University of Rome"
-# ONLY_STATION = "Ladd Observatory"
+#ONLY_STATION = "Sapienza University of Rome"
+ONLY_STATION = "Ladd Observatory"
 MAX_PASS_DUR_S = 15*60 # s
 
 with open("transmissions.json", "r") as f:
@@ -41,9 +42,12 @@ for tx in txs:
 # sort txs by request time
 def trans_date_to_datetime(tx):
     return datetime.datetime.strptime(tx["added"], "%Y-%m-%dT%H:%M:%S.%fZ")
-def cmp_trans_by_date(tx1, tx2):
-    return int((trans_date_to_datetime(tx1) - trans_date_to_datetime(tx2)).total_seconds())
-station_txs_sort = sorted(station_txs, cmp=cmp_trans_by_date)
+if sys.version_info[0] == 2:
+    def cmp_trans_by_date(tx1, tx2):
+        return int((trans_date_to_datetime(tx1) - trans_date_to_datetime(tx2)).total_seconds())
+    station_txs_sort = sorted(station_txs, cmp=cmp_trans_by_date)
+else:
+    station_txs_sort = sorted(station_txs, key=lambda tx: trans_date_to_datetime(tx))
 
 # sort into 10-minute chunks (assumed to be passes)
 pass_cts = {}
@@ -67,7 +71,7 @@ for tx in station_txs_sort:
 del pass_cts[len(pass_cts)-1]
 del pass_cts[0]
 
-cts = pass_cts.values()
+cts = list(pass_cts.values())
 
 for i, ct in pass_cts.items():
     print("%d: %d (started: %s)" % (i, ct, addeds[i]))

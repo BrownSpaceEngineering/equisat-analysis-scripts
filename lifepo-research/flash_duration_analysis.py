@@ -26,7 +26,7 @@ txs.sort(key=lambda tx: tx["created"])
 # collect all flash-related timestamps
 MIN_CREATED = datetime.datetime(2018, 7, 12)
 MIN_TS = 1
-MAX_TS = 60000000 # TODO: MAKE SURE TO ADJUST!
+MAX_TS = 192000000 # GISP: 60000000 # TODO: MAKE SURE TO ADJUST!
 tss = []
 data_hashes = {}
 num_flash_cmps = 0
@@ -108,8 +108,8 @@ while i < len(tss):
 
 
 print("%d distinct flash seqs" % len(flashes))
-print("%d flash bursts" % num_flash_cmps)
-print("%d flash cmps" % num_flash_bursts)
+print("%d flash bursts" % num_flash_bursts)
+print("%d flash cmps" % num_flash_cmps)
 total_q = sum([f["quantity"] for f in flashes])
 print("%d total flash components" % total_q)
 assert(total_q == num_flash_bursts + num_flash_cmps)

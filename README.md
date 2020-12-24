@@ -16,7 +16,7 @@ In general, these scripts are designed to be run standalone, with a few exceptio
 If you have questions about using these scripts, feel free to email [bse@brown.edu](mailto:bse@brown.edu).
 
 ## Dependencies
-Various Python scripts require various dependencies, but here is a complete list:
+Various Python scripts require various dependencies, but here is a complete list (see also `requirements.txt`):
 - [`requests`](https://2.python-requests.org/en/master/)
 - [`numpy`](https://pypi.org/project/numpy/)
 - [`matplotlib`](https://matplotlib.org/)
